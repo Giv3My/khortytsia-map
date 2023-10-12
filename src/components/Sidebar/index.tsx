@@ -2,7 +2,7 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useCopyToClipboard } from '../../hooks';
-import { cutUrl, openLink } from '../../utils';
+import { cutUrl, openLink, translate } from '../../utils';
 import { CoordsType, PointType } from '../Map/types';
 import { sidebarAnimation } from './animation.options';
 import { tabsStyles } from './sidebar.styles';
@@ -26,6 +26,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ selectedPoint, handleClose }) 
 
   const handleGoToGoogleMaps = (coords: CoordsType) => {
     return openLink(`https://www.google.com/maps/search/${coords.lat},${coords.lng}`);
+  };
+
+  const getTextByKey = (key: string) => {
+    return translate('uk', key);
   };
 
   return (
@@ -56,18 +60,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ selectedPoint, handleClose }) 
             </Box>
             <CustomTabPanel value={activeTab} index={0}>
               <div className="sidebar-wrapper">
-                <h1 className="place-name">{selectedPoint.name}</h1>
+                <h1 className="place-name">{getTextByKey(selectedPoint.name)}</h1>
                 <p className="place-description">
-                  {selectedPoint.data.description.join('\n\n')}
+                  {getTextByKey(selectedPoint.data.description)}
                 </p>
               </div>
             </CustomTabPanel>
             <CustomTabPanel value={activeTab} index={1}>
               <div className="place-info">
-                <div className="address" onClick={copy(selectedPoint.data.address)}>
+                <div
+                  className="address"
+                  onClick={copy(getTextByKey(selectedPoint.data.address))}
+                >
                   <span className="icon material-symbols-outlined">location_on</span>
-                  <p>{selectedPoint.data.address}</p>
-                  <div className="copy" onClick={copy(selectedPoint.data.address)}>
+                  <p>{getTextByKey(selectedPoint.data.address)}</p>
+                  <div
+                    className="copy"
+                    onClick={copy(getTextByKey(selectedPoint.data.address))}
+                  >
                     <span className="icon material-symbols-outlined">content_copy</span>
                   </div>
                 </div>

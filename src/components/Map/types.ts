@@ -8,7 +8,7 @@ export interface PointDataType {
   address: string;
   website_url: string;
   phone: string;
-  description: string[];
+  description: string;
 }
 
 export interface PointType {
