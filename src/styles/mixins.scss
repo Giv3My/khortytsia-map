@@ -1,0 +1,9 @@
+@mixin sidebar-scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9b9b9b;
+  }
+}
